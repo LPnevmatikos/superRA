@@ -10,7 +10,7 @@
 
 ## Task 1: Update the Codex harness adapter so superRA invocation authorizes named-agent dispatch
 
-**Status:** Completed (Task 1 implemented 2026-04-22)
+**Status:** Completed (Task 1 approved 2026-04-22)
 
 ### Key Findings
 - `skills/using-superRA/references/codex-tools.md` now tells Codex to

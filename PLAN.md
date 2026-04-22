@@ -47,7 +47,7 @@ Walked at planning time (2026-04-22). Re-walk on-demand only.
 
 ### Task 1: Update the Codex harness adapter so superRA invocation authorizes named-agent dispatch
 **Depends on:** *(none)*
-**Review status:** IMPLEMENTED
+**Review status:** APPROVED
 **Integration status:** *(set during integration)*
 
 **Script:** `skills/using-superRA/references/codex-tools.md` (primary); `skills/using-superRA/references/main-agent.md`, `skills/agent-orchestration/SKILL.md`, and `README.md` only if the adapter change makes an existing statement misleading
