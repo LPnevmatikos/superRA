@@ -81,6 +81,16 @@ Walked at planning time (2026-04-22). Re-walk on-demand only.
 > **Integration note (2026-04-22):** No root `results_attachments/` directory existed on this branch, so Phase C only relocated the plan/results markdown files.
 >
 > **Integration note (2026-04-22):** Permanent records landed at `docs/plans/2026-04-22-codex-agent-dispatch-preference-plan.md` and `docs/plans/2026-04-22-codex-agent-dispatch-preference-results.md`.
+>
+> **User decision (2026-04-22):** Re-enter planning after archive because direct mode still tells the main agent to read raw `agents/implementer.md` / `agents/reviewer.md`, which are not guaranteed in cross-repo Codex plugin use.
+> **Question asked:** If globally installed Codex agents do not make the raw agent files available to the main agent, how should the follow-up proceed?
+> **Rationale (if given):** Fix the accessibility gap before merge.
+>
+> **User decision (2026-04-22):** Use the simple immediate fix for the follow-up: manually copy the direct-mode role protocol into skill-owned references now, and defer automatic sync/generation to a later improvement.
+> **Question asked:** Build the sync mechanism now, or take a simpler copy-paste direct-mode reference first?
+> **Rationale (if given):** Unblock the immediate fix first; improve maintainability in a separate follow-up.
+>
+> **Integration note (2026-04-22):** Active follow-up execution continues in root `PLAN.md` / `RESULTS.md`; this archived pair remains the permanent record for the original dispatch-preference scope.
 
 ### Task 1: Update the Codex instructions surface for dispatch, warm-agent lifecycle, and load semantics
 **Depends on:** *(none)*
