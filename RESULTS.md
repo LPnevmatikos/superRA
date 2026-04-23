@@ -3,8 +3,8 @@
 > Mirrors PLAN.md structure. Updated after each step with key findings.
 > New agents: read PLAN.md for what to do, RESULTS.md for what was found.
 
-**Last updated:** 2026-04-23 (Tasks 1-5 APPROVED; Task 6 added — restructure semantic-merge for owner-located formats + symmetric procedural richness)
-**Status:** Tasks 1-5 APPROVED; Task 6 not started
+**Last updated:** 2026-04-23 (Task 6 implemented — semantic-merge restructured for owner-located formats + symmetric procedural richness)
+**Status:** Tasks 1-5 APPROVED; Task 6 IMPLEMENTED, awaiting review
 
 ---
 
@@ -51,6 +51,31 @@ The targeted terminology scan returned only the expected negative assertions in 
 
 ## Task 6: Restructure semantic-merge skill for owner-located formats and symmetric procedural richness
 
-**Status:** Not started
+**Status:** Implemented; awaiting review
 
-Implementer to fill in on completion: shared procedural flow added to `SKILL.md`, format specs relocated to their owning mode references, `sync-map-format.md` removed, pointers rewired, mode references trimmed to mode-specific content.
+Restructured the semantic-merge skill so format specs live with their owning mode and shared procedural richness lives in the SKILL.md body. Changes file-by-file:
+
+- `skills/semantic-merge/SKILL.md` — expanded from a lean 42-line body to a 103-line body. Retained Core principle, Choose a Mode, Workflow Boundary, Standalone Boundary, and Exception. Replaced "Shared Rules" with a six-step "Shared Procedure" section covering repo-state grounding (branch / worktree / mid-operation / merge base / incoming range / touched files), dirty-state handling via reversible named stash, intent research with role classification (behavior/API, data/schema, docs/narrative, generated outputs, tests, config/build), resolution-plan construction with synthesis and regeneration preferences, research-meaningful escalation (with `handoff-doc §User Decisions Log` pointer), resolve-and-land with commit-shape deferred to mode refs, and a stale-reference sweep at verification. RA framing preserved throughout.
+
+- `skills/semantic-merge/references/workflow-sync-author.md` — now owns the Workflow Sync Map and Task-Local Sync Impact format blocks inlined next to the process steps that write them. Opens with a pointer to `SKILL.md §Shared Procedure` for the shared flow. Process bullets trimmed to mode-specific content: operation run, Sync Map authorship condition, task-local annotation rule, single-commit constraint, post-sync obligation recording.
+
+- `skills/semantic-merge/references/workflow-sync-reviewer.md` — dropped the `sync-map-format.md` load. Added a one-line pointer at the top to `workflow-sync-author.md §Workflow Sync Map Format` / `§Task-Local Sync Impact Format` for shape recognition. Process step 4 now references `SKILL.md §Shared Procedure` role-classification; added a verification step for the stale-reference sweep.
+
+- `skills/semantic-merge/references/standalone-merge.md` — now owns the `SEMANTIC_MERGE.md` merge-record format (headers + File / Script Impact Map) inlined next to the step that writes it. Opens with a pointer to `SKILL.md §Shared Procedure`. Process bullets trimmed to mode-specific content: merge record authorship, decision logging without PLAN.md, operation run, sync commit + propagation commits, drift-test handling, stop boundary.
+
+- `skills/semantic-merge/references/sync-quality.md` — trimmed to the gated checklist only. Opening paragraph points at `SKILL.md §Shared Procedure` for the procedure and at the owning mode references for format specs. Added checklist items for role classification, stale-reference sweep, and stash reporting so reviewers walk what the expanded procedure teaches.
+
+- `skills/semantic-merge/references/sync-map-format.md` — deleted via `git rm`.
+
+- `skills/handoff-doc/references/plan-anatomy.md` — §Sync Map format pointer and §Task-local Sync impact format pointer now target `workflow-sync-author.md §Workflow Sync Map Format` / `§Task-Local Sync Impact Format`. The section still carries only purpose / ownership / lifecycle / placement + one-line format pointer, preserving DRY (no re-introduced Task 3 violation).
+
+- `skills/integration-workflow/SKILL.md` — dropped `semantic-merge/references/sync-map-format.md` from both sync-author and sync-reviewer dispatch reference lists. No other changes.
+
+Verification on 2026-04-23:
+
+```bash
+rg -n "sync-map-format" skills agents README.md CLAUDE.md .codex tests  # zero matches
+python3 skills/codex-superra-setup/scripts/sync_codex_agents.py --scope project --check  # up to date
+python3 skills/codex-superra-setup/scripts/test_sync_codex_agents.py  # 6/6 passed
+git diff --check  # clean
+```

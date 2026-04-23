@@ -181,34 +181,34 @@ Walked at planning time (2026-04-23). Re-walk on-demand only.
 
 ### Task 6: Restructure semantic-merge skill for owner-located formats and symmetric procedural richness
 **Depends on:** Task 1, Task 2, Task 3, Task 4, Task 5
-**Review status:** *(not started)*
+**Review status:** IMPLEMENTED
 **Integration status:** *(pending)*
 
 **Files:** `skills/semantic-merge/SKILL.md`, `skills/semantic-merge/references/workflow-sync-author.md`, `skills/semantic-merge/references/workflow-sync-reviewer.md`, `skills/semantic-merge/references/standalone-merge.md`, `skills/semantic-merge/references/sync-quality.md`, `skills/semantic-merge/references/sync-map-format.md` (to be deleted), `skills/handoff-doc/references/plan-anatomy.md`, `skills/refactor-and-integrate/references/codebase-integration.md`, `skills/integration-workflow/SKILL.md`, and any other file pointing at `sync-map-format.md`.
 **Input:** Current semantic-merge skill (after Task 3 DRY consolidation), the post-review decision above, and the global `semantic-merge-integration` skill as the procedural reference point.
 **Output:** Format specs live with their owning mode (workflow Sync Map + task-local Sync impact in `workflow-sync-author.md`; Standalone Merge Record in `standalone-merge.md`); `sync-map-format.md` is deleted; shared procedural knowledge (intent classification by role, regeneration preference, stale-reference sweep, mid-operation / dirty-state handling, synthesis preference) lives in `SKILL.md` so both modes carry equal richness; mode references shrink to mode-specific process + format + status return.
 
-- [ ] **Step 1: Expand SKILL.md body with shared procedural flow**
-  Add a canonical "Shared Procedure" section covering: repo-state grounding (inspect current branch / worktree / ongoing merge-or-rebase state / merge base / incoming range / touched files); dirty-state handling via a reversible named stash; intent research including role classification (behavior or API / data or schema / docs or narrative / generated outputs / tests / config or build); synthesis preference when both sides are valid; regeneration preference for generated artifacts over hand-editing; stale-reference sweep during verification (labels, paths, docs, generated outputs — not just "no conflict markers"). Keep RA framing: the agent classifies and executes, the researcher decides research-meaningful calls.
+- [x] **Step 1: Expand SKILL.md body with shared procedural flow**
+  Added a canonical "Shared Procedure" section in `skills/semantic-merge/SKILL.md` covering repo-state grounding (branch / worktree / mid-operation / merge base / incoming range / touched files), reversible-stash dirty-state handling, intent research with role classification (behavior/API, data/schema, docs/narrative, generated outputs, tests, config/build), synthesis-then-regeneration preference, research-meaningful escalation, resolve-and-land, and a stale-reference sweep at verification. RA framing preserved: agent classifies and executes within each role; research-meaningful calls inside data, tests, and analysis outputs go to the researcher.
 
-- [ ] **Step 2: Move Workflow Sync Map and task-local Sync impact format into `workflow-sync-author.md`**
-  Inline the full `## Sync Map` template block and the task-local `**Sync impact:**` field anatomy into `workflow-sync-author.md` (the author is the writer). Keep the existing process steps; place the format next to the step that writes it. `workflow-sync-reviewer.md` drops any format re-statement and adds a one-line pointer to the workflow-sync-author reference when the reviewer needs to recognize the shape.
+- [x] **Step 2: Move Workflow Sync Map and task-local Sync impact format into `workflow-sync-author.md`**
+  Inlined the full `## Sync Map` template and the task-local `**Sync impact:**` anatomy into `workflow-sync-author.md` next to the process steps that write them. Preserved the parenthetical-inside-bold form `> **Sync review notes (present only while REVISE is active):**`. `workflow-sync-reviewer.md` now points at `workflow-sync-author.md §Workflow Sync Map Format` / `§Task-Local Sync Impact Format` for shape recognition.
 
-- [ ] **Step 3: Move Standalone Merge Record format into `standalone-merge.md`**
-  Inline the `SEMANTIC_MERGE.md` merge-record format (headers + File / Script Impact Map) into `standalone-merge.md` next to the step that writes it.
+- [x] **Step 3: Move Standalone Merge Record format into `standalone-merge.md`**
+  Inlined the `SEMANTIC_MERGE.md` merge-record template (headers + File / Script Impact Map) into `standalone-merge.md` next to the step that writes it.
 
-- [ ] **Step 4: Delete `sync-map-format.md` and rewire pointers**
-  Remove `skills/semantic-merge/references/sync-map-format.md`. Update every pointer that landed on it: `skills/semantic-merge/SKILL.md` (Choose a Mode bullet), `skills/semantic-merge/references/workflow-sync-reviewer.md`, `skills/semantic-merge/references/sync-quality.md`, `skills/handoff-doc/references/plan-anatomy.md` (§Sync Map format pointer; §Task-local Sync impact format pointer), `skills/refactor-and-integrate/references/codebase-integration.md`, `skills/integration-workflow/SKILL.md` dispatch templates (sync-author and sync-reviewer reference lists). Verify with `rg -n "sync-map-format" skills agents` before committing — expected: zero matches.
+- [x] **Step 4: Delete `sync-map-format.md` and rewire pointers**
+  `git rm skills/semantic-merge/references/sync-map-format.md`. Rewired pointers in `skills/semantic-merge/SKILL.md` §Choose a Mode, `skills/semantic-merge/references/workflow-sync-author.md`, `skills/semantic-merge/references/workflow-sync-reviewer.md`, `skills/semantic-merge/references/standalone-merge.md`, `skills/semantic-merge/references/sync-quality.md`, `skills/handoff-doc/references/plan-anatomy.md` (§Sync Map format pointer + §Task-local Sync impact format pointer — now point at `workflow-sync-author.md`), and `skills/integration-workflow/SKILL.md` dispatch templates (dropped `sync-map-format.md` from both sync-author and sync-reviewer reference lists). `skills/refactor-and-integrate/references/codebase-integration.md` did not point at `sync-map-format.md`. Verified: `rg -n "sync-map-format" skills agents README.md CLAUDE.md .codex tests` returns zero matches.
 
-- [ ] **Step 5: Trim mode references so they stop repeating the SKILL.md body**
-  In `workflow-sync-author.md` and `standalone-merge.md`, remove process bullets that restate the Shared Procedure now in SKILL.md (dirty-state, intent research, conflict resolution by intent, verification checks). Keep only mode-specific content: inputs, the format spec (per Steps 2-3), the commit-shape constraint (workflow = exactly one sync commit; standalone = sync commit + propagation commits), the stop boundary, status return / report shape. `sync-quality.md` keeps the gated checklist and cross-references the SKILL.md body rather than re-teaching the procedure.
+- [x] **Step 5: Trim mode references so they stop repeating the SKILL.md body**
+  `workflow-sync-author.md` and `standalone-merge.md` now carry only mode-specific content: inputs, mode-specific process (commit shape, format writes, mode boundary), the format spec, status return. Each reference opens with a pointer to `SKILL.md §Shared Procedure` for the shared flow. `sync-quality.md` was trimmed to the gated checklist plus a one-paragraph pointer that the canonical procedure lives in `SKILL.md §Shared Procedure` and format specs live in the owning mode references; added checklist items for role classification and stale-reference sweep so the reviewer walks what the procedure teaches.
 
-- [ ] **Step 6: Verify**
-  Run:
+- [x] **Step 6: Verify**
+  Ran:
   ```bash
   rg -n "sync-map-format" skills agents README.md CLAUDE.md .codex tests
   python3 skills/codex-superra-setup/scripts/sync_codex_agents.py --scope project --check
   python3 skills/codex-superra-setup/scripts/test_sync_codex_agents.py
   git diff --check
   ```
-  Confirm the first command returns no matches, generator and tests still pass, and `git diff --check` is clean. Update RESULTS.md Task 6 with a compact summary of the restructure.
+  First command returned zero matches. Generator check reported all files up to date. Test suite passed 6/6. `git diff --check` clean.
