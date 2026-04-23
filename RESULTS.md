@@ -4,13 +4,13 @@
 > New agents: read PLAN.md for what to do, RESULTS.md for what was found.
 
 **Last updated:** 2026-04-22 (Task 1)
-**Status:** In Progress
+**Status:** Completed
 
 ---
 
 ## Task 1: Update the Codex instructions surface for dispatch, warm-agent lifecycle, and load semantics
 
-**Status:** In Progress (integration follow-up updated 2026-04-22)
+**Status:** Completed (Task 1 integration follow-up approved 2026-04-22)
 
 ### Key Findings
 - `skills/using-superRA/references/codex-instructions.md` now tells
