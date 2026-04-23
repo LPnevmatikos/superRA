@@ -84,7 +84,7 @@ Walked at planning time (2026-04-22). Re-walk on-demand only.
 
 ### Task 1: Add skill-owned direct-mode role references and wire main-agent direct mode to them
 **Depends on:** *(none)*
-**Review status:** IMPLEMENTED
+**Review status:** APPROVED
 **Integration status:** *(not started)*
 
 **Script:** `skills/using-superRA/references/direct-mode-implementer.md`, `skills/using-superRA/references/direct-mode-reviewer.md`, `skills/using-superRA/references/main-agent.md`
@@ -98,7 +98,7 @@ Walked at planning time (2026-04-22). Re-walk on-demand only.
 
 ### Task 2: Document and validate the temporary manual-mirror approach
 **Depends on:** 1
-**Review status:** IMPLEMENTED
+**Review status:** APPROVED
 **Integration status:** *(not started)*
 
 **Script:** `CLAUDE.md`, `tests/check-harness-compatibility.sh`, archived 2026-04-22 plan/results pair, `RESULTS.md`
