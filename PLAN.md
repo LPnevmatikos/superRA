@@ -26,7 +26,7 @@
 
 **Output:** Updated workflow, semantic-merge mode references, handoff anatomy, role docs, generated Codex artifacts, tests, and public/contributor documentation.
 
-**Expected Results / Hypotheses:** The revised workflow dispatches generic sync author and sync reviewer agents that load semantic-merge mode references; `## Sync Map` records branch-level thesis and clusters; affected task blocks carry short `**Sync impact:**` pointers; both workflow and standalone modes land exactly one minimal merge commit that leaves existing protection passing, with broader propagation deferred to `refactor-and-integrate` (workflow) or the caller (standalone).
+**Expected Results / Hypotheses:** The revised workflow dispatches generic sync author and sync reviewer agents that load semantic-merge mode references; `## Sync Map` records branch-level thesis and clusters; affected task blocks carry short `**Sync impact:**` pointers; both workflow and standalone modes land one merge commit plus any propagation commits needed to reach semantic coherence, with broader codebase-coherence work deferred to `refactor-and-integrate` (workflow) or the caller (standalone).
 
 **Sensitivity Analysis:** Verify stale `Stage: sync` / branch-level exception language is removed or intentionally retained only as compatibility text. Verify integration reviewers do not need to load full semantic-merge.
 
@@ -96,12 +96,14 @@ Walked at planning time (2026-04-23). Re-walk on-demand only.
 **Pre-sync merge base:** `b6e0640efce48e9dbf2ca9cec9ac1e310aaf82b3`
 **Synced base head:** `30d6c911c9a2fb62582ad948fd4de82b0b2bf150`
 **Incoming range:** `b6e0640..30d6c91`
-**Sync commits:** `865339c` (merge commit of `origin/main` at `30d6c91` into `tighten-integration-rules`)
+**Sync commits:** `865339c` (merge commit of `origin/main` at `30d6c91` into `tighten-integration-rules`), `e7acf40` (Sync Map SHA propagation), `ff082f4` (generator follow-through)
 **Sync review status:** `REVISE`
 
 > **Sync review notes:**
 > 1. [MAJOR] The Sync Map header does not list the full sync commit chain. `PLAN.md:99` records only `865339c`, but the reviewed sync chain also includes `e7acf40` (`PLAN.md` Sync Map SHA propagation) and `ff082f4` (`skills/codex-superra-setup/scripts/sync_codex_agents.py` generator follow-through). `workflow-sync-author.md §Workflow Sync Map Format` requires `**Sync commits:** <MERGE_COMMIT_SHA>[, <PROPAGATION_SHA>...]`, so downstream Integrate cannot reconstruct the authoritative sync range from the handoff record.
+>    → implemented: `**Sync commits:**` now lists `865339c`, `e7acf40`, and `ff082f4`; `workflow-sync-author.md` now requires the author to update the field to the full commit chain before returning.
 > 2. [MAJOR] The PLAN header still carries the superseded one-commit/defer-propagation design. `PLAN.md:29` says workflow and standalone modes land "exactly one minimal merge commit" and defer broader propagation, but the live contract in `skills/semantic-merge/SKILL.md:78` requires "one merge commit plus N propagation commits as needed to reach semantic coherence." Replace the stale header expectation so PLAN.md is coherent before Integrate consumes it.
+>    → implemented: PLAN header now states the 1+N semantic-coherence commit contract and defers only broader codebase-coherence work.
 
 ### Branch Summary
 
@@ -145,7 +147,7 @@ Walked at planning time (2026-04-23). Re-walk on-demand only.
   Create or update a reference for a generic sync reviewer agent. It verifies anchors, incoming intent, conflict resolution, user-decision logging, Sync Map completeness, task-local Sync impact coverage, and scope boundary before Integrate begins.
 
 - [x] **Step 4: Add standalone full merge mode**
-  Create or update a reference for direct semantic-merge use outside integration-workflow. It reconstructs current-branch intent when no PLAN.md already carries it, creates a merge-specific record when needed, lands exactly one minimal merge commit that leaves existing tests and drift tests passing, and defers broader propagation to the caller (or to `refactor-and-integrate` invoked after the skill returns).
+  Create or update a reference for direct semantic-merge use outside integration-workflow. It reconstructs current-branch intent when no PLAN.md already carries it, creates a merge-specific record when needed, lands one merge commit plus propagation commits needed to reach semantic coherence, and defers broader codebase-coherence work to the caller or `refactor-and-integrate`.
 
 ---
 
@@ -273,17 +275,17 @@ Walked at planning time (2026-04-23). Re-walk on-demand only.
 
 **Files:** `skills/semantic-merge/SKILL.md`, `skills/semantic-merge/references/workflow-sync-author.md`, `skills/semantic-merge/references/workflow-sync-reviewer.md`, `skills/semantic-merge/references/standalone-merge.md`, `skills/semantic-merge/references/sync-quality.md` (to be deleted), `skills/integration-workflow/SKILL.md`, `CLAUDE.md`.
 
-**Input:** Post-Task-6 semantic-merge plus the researcher's in-flight uncommitted hand-edits (2026-04-23) that rename `## Techniques` back to `## Shared Steps` with a simple opener, drop Process Step 5 (codebase-coherence obligation recording) from `workflow-sync-author.md`, and restore "sync commit range" phrasing in the author Status Return. `SKILL.md` still carries mode-specific `## Workflow Boundary` and `## Standalone Boundary` sections. `sync-quality.md` is a separate must-load reference loaded on every call path (sync-author dispatch, sync-reviewer dispatch, standalone).
+**Input:** Post-Task-6 semantic-merge plus the researcher's in-flight uncommitted hand-edits (2026-04-23) that rename `## Techniques` back to `## Shared Steps` with a simple opener and drop Process Step 5 (codebase-coherence obligation recording) from `workflow-sync-author.md`. `SKILL.md` still carries mode-specific `## Workflow Boundary` and `## Standalone Boundary` sections. `sync-quality.md` is a separate must-load reference loaded on every call path (sync-author dispatch, sync-reviewer dispatch, standalone).
 
 **Output:**
 - `SKILL.md` carries only shared content: core principle, mode selection, §Shared Steps (renamed from §Techniques per researcher edit, with the terse "The following steps are shared by all modes." opener), §Semantic Coherence Checklist (absorbed from `sync-quality.md`), and the parallel-worktree Exception. No mode-specific boundary sections remain.
 - Mode references each carry: §Boundary + §Inputs + §Mode-Specific Process + §Format + §Status/Report. The main differences between modes reduce to their essential axis — inputs (dispatch-supplied vs inferred), artifact format (Sync Map + task-impact vs `SEMANTIC_MERGE.md`), and communication target (orchestrator status vs caller report).
-- `workflow-sync-author.md` process is 4 steps (not 5); codebase-coherence obligations are recorded in §Boundary + Sync Map post-sync obligations, not as a separate process step. Status Return uses "sync commit range" phrasing.
+- `workflow-sync-author.md` process is 4 steps (not 5); codebase-coherence obligations are recorded in §Boundary + Sync Map post-sync obligations, not as a separate process step. Status Return reports the full sync commit chain.
 - `sync-quality.md` is deleted; its gated checklist lives as a `##` section of `SKILL.md` since the skill body is always loaded when any mode is used. Shared-flow-checklist invariant preserved: implementer and reviewer walk the same section.
 - All pointers rewired to `SKILL.md §Semantic Coherence Checklist` (or its sub-section `§Scope boundary`). Integration-workflow dispatch templates drop `sync-quality.md` from reference lists. CLAUDE.md §DRY ownership updated.
 
 - [x] **Step 1: Adopt researcher's in-flight edits as the starting baseline.**
-  Keep the `## Shared Steps` rename (from `## Techniques`) and the terse opener "The following steps are shared by all modes." Keep `workflow-sync-author.md` process at 4 steps (no codebase-obligation step 5) and its "sync commit range" Status Return phrasing.
+  Keep the `## Shared Steps` rename (from `## Techniques`) and the terse opener "The following steps are shared by all modes." Keep `workflow-sync-author.md` process at 4 steps (no codebase-obligation step 5) and make the Status Return report the full sync commit chain.
 
 - [x] **Step 2: Move `## Workflow Boundary` into `workflow-sync-author.md` as §Boundary at the top.**
   Carry forward the semantic-coherence stopping rule and the deferral of codebase-coherence work to `refactor-and-integrate` via Integrate. The reviewer reference inherits the same boundary by reviewing the same work; point the reviewer's opener at the author's §Boundary rather than restating it.
