@@ -43,7 +43,7 @@
 - [x] **Plan approved** — researcher signed off on the direction and the initial scope for v1
 - [x] **Execution complete** — all tasks `APPROVED`, verification checks pass
 - [ ] **Drift tests created** — integration-phase protection added and passing on baseline
-- [ ] **Refactored** — integration reviewer `APPROVED`
+- [x] **Refactored** — integration reviewer `APPROVED`
 - [ ] **Docs finalized** — `RESULTS.md` matured, project docs audited, doc-reviewer `APPROVED`
 - [ ] **Merged** — branch merged to main or PR opened
 
@@ -73,7 +73,7 @@
 
 > **User decision (2026-04-23):** Rebase the branch onto current `main` (HEAD `b6e0640`), dropping the 34 unrelated objective-first task/step-semantics refactor commits and keeping only the 17 theory-modeling commits (`f761c26..16dcfe7` on the pre-rebase tree).
 > **Question asked:** Reorient this branch onto current main to drop the irrelevant objective-first commits — rebase or merge?
-> **Rationale:** The objective-first refactor work sat on the same branch but is a separate initiative; the user wants the theory-modeling work to stand alone on current main. Semantic-merge resolved three conflict stops during rebase (`README.md` principle #5 wording, `plan-anatomy.md` Phase B upstream-intent synthesis, `planning-workflow/SKILL.md` Remember-list synthesis, `agents/implementer.md` + mirrored `.codex/agents/superra_implementer.toml`) — base intent preserved; theory-modeling generalizations kept; objective-first-specific phrasings dropped. Derived artifacts (`direct-mode-*.md`) regenerated from the rebased agent sources. The earlier Phase B integration reviews on Tasks 2 & 3 flagged scope creep from the now-dropped commits; those findings are structurally resolved and the stale review-notes blockquotes were removed with integration status reset to the pre-integration default so Phase B re-runs against the new rebased base.
+> **Rationale:** The objective-first refactor work sat on the same branch but is a separate initiative; the user wants the theory-modeling work to stand alone on current main. Semantic-merge resolved four conflict stops during rebase (`README.md` principle #5 wording, `plan-anatomy.md` Phase B upstream-intent synthesis, `planning-workflow/SKILL.md` Remember-list synthesis, and `agents/implementer.md` with its mirrored `.codex/agents/superra_implementer.toml`) — base intent preserved; theory-modeling generalizations kept; objective-first-specific phrasings dropped. Derived artifacts (`direct-mode-*.md`) regenerated from the rebased agent sources. The earlier Phase B integration reviews on Tasks 2 & 3 flagged scope creep from the now-dropped commits; those findings are structurally resolved and the stale review-notes blockquotes were removed with integration status reset to the pre-integration default so Phase B re-runs against the new rebased base.
 
 ## Project Conventions
 
