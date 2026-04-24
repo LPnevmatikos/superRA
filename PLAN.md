@@ -83,6 +83,10 @@
 > **Question asked:** Completion menu after Tasks 5 and 6 APPROVED — proceed with integration, change the plan, keep branch as-is, or discard?
 > **Rationale:** Tasks 5 and 6 rewrote the skill body (four gates, new Iron Law, five new `[BLOCKING]` items) and propagated the framing into the planning and integration references; the `Refactored` milestone was rolled back by the earlier 2026-04-23 restructure decision so Phase B re-runs on the restructured skill before merge.
 
+> **User decision (2026-04-24):** Open the PR before the Document phase — skip the doc-writer maturation pass for now; reviewers can evaluate the branch against PLAN.md and the in-tree RESULTS.md draft.
+> **Question asked:** Where should RESULTS.md land permanently under `docs/plans/`, or should the Document phase be deferred?
+> **Rationale:** User wants PR review to start in parallel; RESULTS.md maturation and relocation can land as a follow-up commit on the PR branch if reviewers need the permanent record before merge.
+
 ## Project Conventions
 
 Walked at planning time (2026-04-22). Re-walk on-demand only.
