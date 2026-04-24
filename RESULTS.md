@@ -3,8 +3,8 @@
 > Mirrors PLAN.md structure. Updated after each step with key findings.
 > New agents: read PLAN.md for what to do, RESULTS.md for what was found.
 
-**Last updated:** 2026-04-23 (Execution complete — all 11 tasks approved; entering Phase B Step 1)
-**Status:** All 11 tasks reviewer-approved. Phase A complete, Phase B Step 0 complete (integration base `origin/main`); ready for integration reviewer dispatch.
+**Last updated:** 2026-04-23 (Phase B integration review approved; entering Phase C)
+**Status:** All 11 tasks reviewer-approved and integration-approved. Phase A + Phase B complete (1 MINOR polish deferred to §Known Follow-Ups); ready for Phase C doc finalization.
 
 ---
 
@@ -401,3 +401,10 @@ Because `CLAUDE.md` is auto-loaded for any edit in this repo, the gate propagate
 - `CLAUDE.md` (gate statement prepended to the section)
 - `PLAN.md` (Task 11 added, decision log entries for Phase A drift tests, base-branch confirmation, and Task 11 scope add)
 - `RESULTS.md` (this section; top-of-file Status and Last-updated lines)
+
+## Known Follow-Ups (Deferred Polish)
+
+Post-APPROVE items the reviewer flagged or surfaced for orchestrator judgment; deferred rather than blocking the integration flip. Track here so the next editor under the teach-the-protocol gate can sweep them.
+
+- **`test_sync_codex_agents.py` hardening** (Task 6 MINOR #5). Add a smoke assertion that direct-mode outputs do not contain dispatch-only wording (`first dispatch`, `re-dispatch prompt`, `Worktree: field`, `in the dispatch` outside the opening "no dispatch prompt" preface). The restored `cleanup_*_handoff` helpers already `raise ValueError` when their source-text targets drift, so the current silent-regression class is covered; this test would belt-and-brace that.
+- **Reviewer compact-etiquette bullet example** (Phase B integration review MINOR). `agents/reviewer.md:98` and its generator copy `skills/using-superRA/references/direct-mode-reviewer.md:89` use `→ implemented:` as the illustrative action in the shared boundary-preservation rule, but `→ implemented:` is implementer-only. The underlying rule (stay within the assigned task block, preserve `---` separators and `### Task N:` headings) is correct for reviewers too; the example should be reworked to a reviewer action (e.g., "when writing or removing a review-notes blockquote"). Requires regen of the direct-mode copy via `sync_codex_agents.py --scope project`.
