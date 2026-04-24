@@ -92,7 +92,7 @@ Walked at planning time (2026-04-22). Re-walk on-demand only.
 ### Task 1: Create the `theory-modeling` domain skill and its stage-scoped references
 **Depends on:** *(none)*
 **Review status:** APPROVED
-**Integration status:** *(set during integration — not filled at planning time)*
+**Integration status:** APPROVED
 
 **Script:** `skills/theory-modeling/SKILL.md`, `skills/theory-modeling/references/*.md`
 **Input:** Existing domain-skill pattern in `skills/econ-data-analysis/` plus the approved v1 requirements in this plan’s Decisions section
@@ -106,7 +106,7 @@ Walked at planning time (2026-04-22). Re-walk on-demand only.
 ### Task 2: Wire the new vertical into runtime surfaces, docs, and discovery
 **Depends on:** *(none)*
 **Review status:** APPROVED
-**Integration status:** *(set during integration — not filled at planning time)*
+**Integration status:** APPROVED
 
 **Script:** Existing workflow/docs/hook/test files named in the Implementation Inventory, plus `.agents/skills/theory-modeling`
 **Input:** The approved skill name, the new file layout from Task 1, and the current runtime/docs wording in the repo
@@ -120,7 +120,7 @@ Walked at planning time (2026-04-22). Re-walk on-demand only.
 ### Task 3: Verify the new vertical end to end and reconcile any drift
 **Depends on:** Task 1, Task 2
 **Review status:** APPROVED
-**Integration status:** *(set during integration — not filled at planning time)*
+**Integration status:** APPROVED
 
 **Script:** Verification commands and any touched files needed to resolve resulting failures
 **Input:** Completed outputs from Tasks 1 and 2
@@ -136,7 +136,7 @@ Walked at planning time (2026-04-22). Re-walk on-demand only.
 ### Task 4: Tighten notation discipline — strengthen the ordering check and add an explicit Notation Conventions update mechanism
 **Depends on:** Task 1
 **Review status:** APPROVED
-**Integration status:** *(set during integration — not filled at planning time)*
+**Integration status:** APPROVED
 
 **Script:** `skills/theory-modeling/SKILL.md`, `skills/theory-modeling/references/planning.md`
 **Input:** Existing Define-Derive-Validate checklist (SKILL.md) and the Model Inventory / Assumption Map template (references/planning.md)
