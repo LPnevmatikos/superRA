@@ -115,6 +115,9 @@
 > **Question asked:** Step 4 completion menu — proceed with integration / change plan / keep as-is / discard?
 > **Rationale:** This branch is plugin-engineering work, not empirical analysis — there are no numerical results to protect with drift tests; the harness compatibility test (42/42 PASS) is the durable check. The last sync (2026-04-25, post-Task-8) was a no-op because `origin/main` had not advanced; the user judges another sync unnecessary at this point. Refactor + post-sync review run together against the full Task 9 + 10–13 surface.
 
+> **User decision (2026-04-30):** Stop here after Integrate. Skip Document phase (RESULTS.md Stage 2 maturation, project doc audit, doc-reviewer pass) and skip the PR. Branch `superRA-model-skill` left at HEAD `192cdf0` for the user to handle PR/merge later.
+> **Question asked:** After Refactored: run Document phase then PR / skip Document and PR / stop here?
+
 ## Project Conventions
 
 Walked at planning time (2026-04-22). Re-walk on-demand only.
